@@ -38,7 +38,7 @@ class grid extends Component {
             }
         }
         if (arr.indexOf(null) === -1) {
-            this.props.updateBoardState(this.props.gridId, value);
+            this.props.updateBoardCompleteState(this.props.gridId, value);
         }
         return null;
     }
@@ -63,8 +63,8 @@ class grid extends Component {
                                                     gridDisableState={this.props.gridDisableState}
                                                     isBoardClickedOnce={this.props.isBoardClickedOnce}
                                                     clickedCellId={this.props.clickedCellId}
-                                                    boardStatus={this.props.boardStatus}
-                                                    winnerPlayer={this.props.winnerPlayer} />
+                                                    winnerPlayer={this.props.winnerPlayer} 
+                                                    boardCompleteStatus = {this.props.boardCompleteStatus}/>
                                             </td>
                                         );
                                     })}

@@ -6,15 +6,17 @@ const cell = (props) => {
     const cellId = props.cellId;
     const gridId = props.gridId;
     const clickedCellId = props.clickedCellId;
-    const boardStatus = props.boardStatus;
     const winnerPlayer = props.winnerPlayer;
+    const boardCompleteStatus = props.boardCompleteStatus;
+
+    console.log(boardCompleteStatus);
 
     if (props.isBoardClickedOnce === false) {
         disabled = false;
     }
     else {
-        disabled = winnerPlayer || props.value[cellId] || boardStatus[gridId] ||
-            (boardStatus[clickedCellId] ? clickedCellId === gridId : clickedCellId !== gridId);
+        disabled = winnerPlayer || props.value[cellId] ||
+            ((boardCompleteStatus[clickedCellId]) ? clickedCellId === gridId : clickedCellId !== gridId);
     }
 
 

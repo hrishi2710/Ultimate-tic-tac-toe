@@ -10,7 +10,8 @@ class Board extends Component {
         xIsNext: false,
         isBoardClickedOnce: false,
         clickedCellId: '',
-        winnerPlayer: ''
+        winnerPlayer: '',
+        boardCompleteState: Array(9).fill(null)
     };
 
     nextGrid = (cellId) => {
@@ -20,9 +21,18 @@ class Board extends Component {
 
     updateBoardState = (gridId, value) => {
         const updatedBoardState = this.state.boardState.slice();
+        // console.log(updatedBoardState);
+        if (updatedBoardState[gridId] === null){
         updatedBoardState[gridId] = value;
+        }
         this.determineWinner(updatedBoardState);
         this.setState({ boardState: updatedBoardState });
+    }
+
+    updateBoardCompleteState = (gridId, value) => {
+        const updatedBoardCompleteState = this.state.boardCompleteState.slice();
+        updatedBoardCompleteState[gridId] = value;
+        this.setState({ boardCompleteState :  updatedBoardCompleteState});
     }
 
     determineWinner = (arr) => {
@@ -79,7 +89,7 @@ class Board extends Component {
             default:
                 winner = <h4> Next Player : {this.state.value}</h4>;
         }
-
+        
         return (
             <div className ={classes.Board}>
                 {winner}
@@ -97,9 +107,10 @@ class Board extends Component {
                                                     value={this.state.value}
                                                     isBoardClickedOnce={this.state.isBoardClickedOnce}
                                                     updateBoardState={(gridId, value) => this.updateBoardState(gridId, value)}
+                                                    updateBoardCompleteState={(gridId,value)=> this.updateBoardCompleteState(gridId,value)}
                                                     clickedCellId={this.state.clickedCellId}
-                                                    boardStatus={this.state.boardState}
-                                                    winnerPlayer={this.state.winnerPlayer} />
+                                                    winnerPlayer={this.state.winnerPlayer} 
+                                                    boardCompleteStatus = {this.state.boardCompleteState}/>
                                             </td>
                                         );
                                     })}
